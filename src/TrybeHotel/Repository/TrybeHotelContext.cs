@@ -9,7 +9,7 @@ public class TrybeHotelContext : DbContext, ITrybeHotelContext
     public DbSet<Room> Rooms { get; set; }
 
     public TrybeHotelContext(DbContextOptions<TrybeHotelContext> options) : base(options) { }
-    // public TrybeHotelContext() { }
+    public TrybeHotelContext() { }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var connectionString = "Server=localhost;Database=TrybeHotel;User=SA;Password=TrybeHotel12!;TrustServerCertificate=True"; 
