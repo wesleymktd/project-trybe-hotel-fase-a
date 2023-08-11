@@ -30,8 +30,8 @@ namespace TrybeHotel.Repository
         // 5. Desenvolva o endpoint POST /hotel
         public HotelDto AddHotel(Hotel hotel)
         {
-            var city = _context.Cities.FirstOrDefault(c => c.CityId == hotel.CityId);
-
+            var city = _context.Cities.FirstOrDefault(c => c.CityId == hotel.CityId) ?? throw new ArgumentException("City not found");
+            
             var hotelAdd = new Hotel
             {
                 Name = hotel.Name,
