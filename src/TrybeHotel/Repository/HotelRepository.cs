@@ -15,14 +15,14 @@ namespace TrybeHotel.Repository
         public IEnumerable<HotelDto> GetHotels()
         {
             var hotelsDto = _context.Hotels
-            .Select(hotel => new HotelDto 
-            {
-                hotelId = hotel.HotelId,
-                name = hotel.Name,
-                address = hotel.Address,
-                cityId = hotel.CityId,
-                cityName = hotel.City.Name,
-            });
+                .Select(hotel => new HotelDto 
+                {
+                    hotelId = hotel.HotelId,
+                    name = hotel.Name,
+                    address = hotel.Address,
+                    cityId = hotel.CityId,
+                    cityName = hotel.City.Name,
+                });
 
             return hotelsDto;
         }
@@ -30,7 +30,27 @@ namespace TrybeHotel.Repository
         // 5. Desenvolva o endpoint POST /hotel
         public HotelDto AddHotel(Hotel hotel)
         {
-            throw new NotImplementedException();
+            var city = _context.Cities.FirstOrDefault(c => c.CityId == hotel.CityId);
+
+            var hotelAdd = new Hotel
+            {
+                Name = hotel.Name,
+                Address = hotel.Address,
+                CityId = city.CityId
+            };
+
+            _context.Hotels.Add(hotelAdd);
+            _context.SaveChanges();
+
+            return new HotelDto
+            {
+                hotelId = hotelAdd.HotelId,
+                name = hotelAdd.Name,
+                address = hotelAdd.Address,
+                cityId = city.CityId,
+                cityName = city.Name
+            };
+
         }
     }
 }
