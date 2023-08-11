@@ -66,13 +66,72 @@ public class IntegrationTest: IClassFixture<WebApplicationFactory<Program>>
         }).CreateClient();
     }
 
-    [Trait("Category", "Meus testes")]
-    [Theory(DisplayName = "Executando meus testes")]
+    [Trait("Category", "1. testando a rota GET /city")]
+    [Theory(DisplayName = "Será validado que a resposta é status 200")]
     [InlineData("/city")]
-    public async Task TestGet(string url)
+    public async Task TestGetCity(string url)
     {
         var response = await _clientTest.GetAsync(url);
         Assert.Equal(System.Net.HttpStatusCode.OK, response?.StatusCode);
+    }
+
+    [Trait("Category", "2. testando a rota POST /city")]
+    [Theory(DisplayName = "Será validado que a resposta será um status http 201")]
+    [InlineData("/city")]
+    public async Task TestPostCity(string url)
+    {
+        var inputObj = new {
+            Name = "Rio de Janeiro"
+        };
+        var response = await _clientTest.PostAsync(url,new StringContent(JsonConvert.SerializeObject(inputObj), System.Text.Encoding.UTF8, "application/json"));
+        Assert.Equal(System.Net.HttpStatusCode.Created, response?.StatusCode);
+    }
+
+    [Trait("Category", "3. testando a rota GET /hotel")]
+    [Theory(DisplayName = "Será validado que a resposta é status 200")]
+    [InlineData("/hotel")]
+    public async Task TestGetHotel(string url)
+    {
+        var response = await _clientTest.GetAsync(url);
+        Assert.Equal(System.Net.HttpStatusCode.OK, response?.StatusCode);
+    }
+
+    [Trait("Category", "4. testando a rota POST /hotel")]
+    [Theory(DisplayName = "Será validado que a resposta será um status http 201")]
+    [InlineData("/hotel")]
+    public async Task TestPostHotel(string url)
+    {
+        var inputObj = new {
+            Name = "Trybe Hotel RJ",
+            Address = "Avenida Atlântica, 1400",
+            CityId = 1
+        };
+        var response = await _clientTest.PostAsync(url,new StringContent(JsonConvert.SerializeObject(inputObj), System.Text.Encoding.UTF8, "application/json"));
+        Assert.Equal(System.Net.HttpStatusCode.Created, response?.StatusCode);
+    }
+
+    [Trait("Category", "5. testando a rota GET /room/:hotelId")]
+    [Theory(DisplayName = "Será validado que a resposta é status 200")]
+    [InlineData("/room/1")]
+    public async Task TestGetRoomById(string url)
+    {
+        var response = await _clientTest.GetAsync(url);
+        Assert.Equal(System.Net.HttpStatusCode.OK, response?.StatusCode);
+    }
+
+    [Trait("Category", "6. testando a rota POST /room")]
+    [Theory(DisplayName = "Será validado que a resposta será um status http 201")]
+    [InlineData("/room")]
+    public async Task TestPostRoom(string url)
+    {
+        var inputObj = new {
+            Name = "Suite Básica",
+            Capacity = 2,
+            Image = "image suite",
+            HotelId = 1
+        };
+        var response = await _clientTest.PostAsync(url,new StringContent(JsonConvert.SerializeObject(inputObj), System.Text.Encoding.UTF8, "application/json"));
+        Assert.Equal(System.Net.HttpStatusCode.Created, response?.StatusCode);
     }
 
 }
