@@ -125,4 +125,4 @@ $ dotnet test --filter `nome_do_teste`
 - ASP.NET
 - EntityFramework
 - Xunit
-- SqlServer
+- azure sql edge
