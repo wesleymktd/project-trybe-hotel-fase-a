@@ -1,7 +1,7 @@
 ## 🧐 Sobre
 
 <p align="left"> 
-O projeto Trybe Hotel se trata da implementação de uma Api de um site de reserva de uma rede de Hoteis onde nessa primeira foram implementados os seguintes processos:
+O projeto Trybe Hotel se trata da implementação de uma Api de um site de reserva de uma rede de Hoteis, onde nessa primeira fase foram implementados os seguintes processos:
 
 ### Cadastro e consulta de cidades
   - Rota de consulta GET /city
