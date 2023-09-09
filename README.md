@@ -87,8 +87,8 @@ O projeto Trybe Hotel se trata da implementação de uma Api de um site de reser
 }
 ```
   - Rota de exclusão de Quartos DELETE /room/:roomId
-- 
-- testes automatizados
+
+### Testes automatizados
  
 
 ## ⚒ Instalando <a name = "installing"></a>
